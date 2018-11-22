@@ -76,7 +76,7 @@
   align-items: center;
   justify-content: space-evenly;
   width: 100%;
-  height: 50px;
+  height: 70px;
   background-color: #ffffff;
   border-radius: 25px;
   padding: 5px;
@@ -102,8 +102,40 @@
 .Task-filter {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: start;
+  height: 100%;
   font-size: 15px;
+}
+.Task-filter > :not(:first-child) {
+  margin-left: 10px;
+}
+.Filter-date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -5px;
+}
+.Filter-status {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.Filter-status select {
+  height: 30px;
+  border-radius: 10px;
+}
+.Filter-date > :not(:first-child) {
+  margin-top: 5px;
+}
+.Filter-date input {
+  display: block;
+  padding: 5px !important;
+  height: 10px !important;
+}
+.Task-filter-action {
+  display: flex;
+  flex-direction: column;
 }
 .Task-item {
   margin-top: 15px;
@@ -163,12 +195,20 @@
 .Task-button.hide {
   display: none;
 }
-.Task-button.complete, .Task-button.save, .Task-button.add, .Task-button.filter, .Task-button.search {
+.Task-button.complete,
+.Task-button.save,
+.Task-button.add,
+.Task-button.filter,
+.Task-button.search,
+.Task-button.filter-clear {
   background-color: #104d1f;
   color: #ffffff;
 }
-.Task-button.filter, .Task-button.search{
-  margin: 0 0 0 10px;
+.Task-button.filter, .Task-button.search, .Task-button.filter-clear{
+  margin: 5px 0 0 10px;
+}
+.Task-button.filter-clear{
+  background-color: #860c0c;
 }
 .Task-button.add{
   margin:0;
@@ -182,7 +222,13 @@
   align-items: center;
   font-size: 17px;
 }
-.Task-button.complete:hover, .Task-button.edit:hover{
+.Task-button.complete:hover,
+.Task-button.edit:hover,
+.Task-button.filter-clear:hover,
+.Task-button.filter:hover,
+.Task-button.add:hover,
+.Task-button.search:hover
+{
   background-color: #000000;
   color: white;
 }
@@ -196,7 +242,7 @@
   display: flex;
   flex-direction: column;
 }
-.Task-edit.hide, .Task-add.hide {
+.Task-edit.hide, .Task-add.hide, .Task-button.filter.hide {
   display: none;
 }
 .Task-edit .Status-block{

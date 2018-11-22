@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 
 class EditTask extends React.Component {
 
@@ -19,6 +20,10 @@ class EditTask extends React.Component {
                 edit: nextProps.editTask
             });
         }
+    }
+
+    componentDidUpdate() {
+        ReactDOM.findDOMNode(this.refs.title).focus();
     }
 
     handlerSaveClick(e) {
@@ -45,12 +50,23 @@ class EditTask extends React.Component {
                     <label htmlFor="task-status">Выполнение:</label>
                     <input ref="status" defaultChecked={this.task.status} type="checkbox" id="task-status"/>
                 </div>
-                <textarea ref="description" defaultValue={this.task.description} />
+                <textarea rows="5" ref="description" defaultValue={this.task.description} />
                 <a href="#" className="Task-button save" onClick={this.handlerSaveClick.bind(this)}>Сохранить</a>
             </div>
         );
     }
 
+}
+
+EditTask.propTypes = {
+    editCallback: PropTypes.func,
+    itemsTask: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        createdAt: PropTypes.string.isRequired,
+        status: PropTypes.bool.isRequired,
+        description: PropTypes.string.isRequired,
+    }),
+    editTask: PropTypes.bool.isReqired
 }
 
 export default EditTask;

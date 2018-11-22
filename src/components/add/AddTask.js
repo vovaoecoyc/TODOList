@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
+import Moment from 'moment';
 
 class AddTask extends React.Component {
 
@@ -20,10 +22,9 @@ class AddTask extends React.Component {
 
     handlerSaveAddFields() {
         let title = ReactDOM.findDOMNode(this.refs.title).value,
-            date = new Date(),
             status = ReactDOM.findDOMNode(this.refs.status).checked,
             description = ReactDOM.findDOMNode(this.refs.description).value,
-            createdAt = date.getFullYear() + '/' + date.getMonth() + '/' + date.getDate() ;
+            createdAt = Moment().format('YYYY/MM/DD');
         ReactDOM.findDOMNode(this.refs.title).value = '';
         ReactDOM.findDOMNode(this.refs.description).value = '';
         ReactDOM.findDOMNode(this.refs.status).checked = false;
@@ -50,6 +51,11 @@ class AddTask extends React.Component {
         );
     }
 
+}
+
+AddTask.propTypes = {
+    addCallback: PropTypes.func,
+    showAdd: PropTypes.bool.isRequired
 }
 
 export default AddTask;

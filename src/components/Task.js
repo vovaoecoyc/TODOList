@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import EditTask from './edit/EditTask';
 
 class Task extends React.Component {
@@ -6,7 +7,6 @@ class Task extends React.Component {
     constructor(props) {
         super(props);
         this.elems = this.props.itemsTask;
-        this.key = this.props.itemKey;
         this.state = {
             task: this.props.itemsTask,
             status: this.elems.status,
@@ -24,6 +24,7 @@ class Task extends React.Component {
             this.setState({
                 status: true
             });
+            this.props.taskCallback(this.state.status);
         }
     }
 
@@ -35,12 +36,6 @@ class Task extends React.Component {
         });
     }
 
-    /*handlerCallbackEdit = (item) => {
-        this.setState({
-            task: {title: 'ff', createdAt: '3333/33/33',description: 'jgbcfybt', status: true},
-            edit: false
-        });
-    }*/
     handlerCallbackEdit(item) {
         this.setState({
             task: item,
@@ -48,6 +43,7 @@ class Task extends React.Component {
             contentTask: true,
             status: item.status
         });
+        this.props.taskCallback(this.state.status);
     }
 
     render () {
@@ -55,7 +51,7 @@ class Task extends React.Component {
             statusColor = this.state.status ? 'completed' : '',
             showContent = this.state.contentTask ? '' : 'hide';  
         return (
-            <div key={`task-${this.key}`} className="Task-item">
+            <div className="Task-item">
                 <div className={`Task-item-content ${showContent}`}>
                     <span className="Task-created">
                         {this.state.task.createdAt}
@@ -74,6 +70,16 @@ class Task extends React.Component {
             </div> 
         );
     }
+}
+
+Task.propTypes = {
+    itemsTask: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        createdAt: PropTypes.string.isRequired,
+        status: PropTypes.bool.isRequired,
+        description: PropTypes.string.isRequired,
+    }),
+    taskCallback: PropTypes.func
 }
 
 export default Task;

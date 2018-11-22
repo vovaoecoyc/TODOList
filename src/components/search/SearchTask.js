@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 
 class SearchTask extends React.Component {
 
@@ -21,6 +21,10 @@ class SearchTask extends React.Component {
         );
     }
 
+}
+
+SearchTask.propTypes = {
+    searchCallback: PropTypes.func
 }
 
 export default SearchTask;
