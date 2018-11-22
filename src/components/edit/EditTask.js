@@ -26,6 +26,8 @@ class EditTask extends React.Component {
         ReactDOM.findDOMNode(this.refs.title).focus();
     }
 
+
+
     handlerSaveClick(e) {
         e.preventDefault();
         let title = ReactDOM.findDOMNode(this.refs.title).value,
@@ -36,7 +38,7 @@ class EditTask extends React.Component {
             title: title,
             createdAt: createdAt,
             description: description,
-            status: status
+            status: status,
         });
             
     }
@@ -66,7 +68,7 @@ EditTask.propTypes = {
         status: PropTypes.bool.isRequired,
         description: PropTypes.string.isRequired,
     }),
-    editTask: PropTypes.bool.isReqired
+    editTask: PropTypes.bool
 }
 
 export default EditTask;

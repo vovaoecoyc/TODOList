@@ -47,7 +47,6 @@ class TaskList extends React.Component {
                 }
                 // return false;
             });
-            console.log(filtredTaskList);
             this.setState({
                 taskList: filtredTaskList
             });
@@ -63,6 +62,7 @@ class TaskList extends React.Component {
         if (!clear) {
             if (data.inputState !== '' && data.inputState !== undefined) {
                 let filtredTaskList = [];
+                localStorage.setItem('beforeFilter', JSON.stringify(this.state.taskList));
                 filtredTaskList = this.state.taskList.filter(function(value, i) {
                     if (Moment(data.inputLeftDate, 'YYYY/MM/DD').isValid() &&
                      Moment(data.inputRightDate, 'YYYY/MM/DD').isValid() &&
@@ -96,7 +96,7 @@ class TaskList extends React.Component {
         }
         else {
             this.setState({
-                taskList: this.task
+                taskList: JSON.parse(localStorage.getItem('beforeFilter'))//this.task
             });
         }
         

@@ -242,7 +242,7 @@
   display: flex;
   flex-direction: column;
 }
-.Task-edit.hide, .Task-add.hide, .Task-button.filter.hide {
+.Task-edit.hide, .Task-add.hide, .Task-button.filter.hide, .Task-button.filter-clear.hide {
   display: none;
 }
 .Task-edit .Status-block{

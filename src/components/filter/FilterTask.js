@@ -55,7 +55,8 @@ class FilterTask extends React.Component {
     }
 
     render() {
-        let filtered = this.state.filtered ? 'hide' : '';
+        let filtered = this.state.filtered ? 'hide' : '',
+            filteredClear = this.state.filtered ? '' : 'hide';
         return (
             <div className="Task-filter">
                 <div className="Filter-status">
@@ -73,7 +74,7 @@ class FilterTask extends React.Component {
                 </div>
                 <div className="Task-filter-action">
                     <a className={`Task-button filter ${filtered}`} onClick={this.handlerFilterClick.bind(this)} href="#">Применить фильтр</a>
-                    <a className="Task-button filter-clear" onClick={this.handlerClearFilterClick.bind(this)} href="#">Сбросить фильтр</a>
+                    <a className={`Task-button filter-clear ${filteredClear}`} onClick={this.handlerClearFilterClick.bind(this)} href="#">Сбросить фильтр</a>
                 </div>
             </div>
         );
