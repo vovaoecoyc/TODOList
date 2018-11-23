@@ -8,14 +8,14 @@ class Task extends React.Component {
         super(props);
         this.elems = this.props.itemsTask;
         this.state = {
-            task: this.props.itemsTask,
+            task: this.elems,
             status: this.elems.status,
             contentTask: true,
             edit: false
         };
         //this.changeStatusComplete = this.changeStatusComplete.bind(this);
-        this.editTask = this.editTask.bind(this);
         this.handlerCallbackEdit = this.handlerCallbackEdit.bind(this);
+        this.editTask = this.editTask.bind(this);
     }
 
     changeStatusComplete(e) {
@@ -24,32 +24,33 @@ class Task extends React.Component {
             this.setState({
                 status: true
             });
-            this.props.taskCallback(this.state.status);
+            this.props.taskCallback(this.state.task, false);
         }
     }
 
     editTask(e) {
         e.preventDefault();
         this.setState({
-            edit: true,
+            edit: !this.state.edit,//true,
             contentTask: false
         });
     }
 
-    handlerCallbackEdit(item) {
+    handlerCallbackEdit(item, edit) {
         this.setState({
             task: item,
-            edit: false,
+            status: item.status,
             contentTask: true,
-            status: item.status
+            edit: edit,
         });
-        this.props.taskCallback(this.state.status);
+        this.props.taskCallback(item);
     }
 
     render () {
         let hideComplete = this.state.status ? 'hide' : '',
             statusColor = this.state.status ? 'completed' : '',
-            showContent = this.state.contentTask ? '' : 'hide';  
+            showContent = this.state.contentTask ? '' : 'hide',
+            editBlock = this.state.edit ? '' : 'hide'; 
         return (
             <div className="Task-item">
                 <div className={`Task-item-content ${showContent}`}>
@@ -66,7 +67,9 @@ class Task extends React.Component {
                     <a href="#" className={`Task-button complete ${hideComplete}`} onClick={this.changeStatusComplete.bind(this)}>Завершить</a>
                     <a href="#" className="Task-button edit" onClick={this.editTask}>Редактировать</a>
                 </div>
-                <EditTask editCallback={this.handlerCallbackEdit} itemsTask={this.state.task} editTask={this.state.edit} /> 
+                <div className={`Edit-block ${editBlock}`}>
+                    <EditTask key={this.elems.id} editCallback={this.handlerCallbackEdit} itemsTask={this.state.task} /> 
+                </div>
             </div> 
         );
     }

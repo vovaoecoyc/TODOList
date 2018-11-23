@@ -102,9 +102,16 @@ class TaskList extends React.Component {
         
     }
 
-    handlerCallbackStatusTask(status) {
+    handlerCallbackStatusTask(taskChanged) {
+        let updatedTasks = this.state.taskList.map(value => {
+            if (value.id === taskChanged.id) {
+                return taskChanged; 
+            }
+            return value;
+        });
+        
         this.setState({
-            status: status
+            taskList: updatedTasks
         });
     }
 
@@ -121,7 +128,7 @@ class TaskList extends React.Component {
                 <AddTask addCallback={this.handlerCallbackAdd} showAdd={this.state.add} />
                 {
                     this.state.taskList.map((value, i) => 
-                         <Task taskCallback={this.handlerCallbackStatusTask} key={value.title} itemsTask={value} />
+                        <Task taskCallback={this.handlerCallbackStatusTask} key={value.id} itemsTask={value} />
                     )
                 }
             </div>
